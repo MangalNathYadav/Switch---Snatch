@@ -2,7 +2,8 @@
 // 1. Load dependencies
 const express = require('express');
 const http = require('http');
-const { Server } = require('socket.io');
+const socketIO = require('socket.io');
+const Server = socketIO.Server;
 const path = require('path');
 
 // 2. Create Express app and HTTP server
