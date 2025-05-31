@@ -1,0 +1,17 @@
+{
+  "name": "switch---snatch",
+  "version": "1.0.0",
+  "description": "Nintendo-inspired Coin Collector Co-Op",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "phaser": "^3.90.0",
+    "socket.io": "^4.8.1"
+  }
+}

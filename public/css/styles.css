@@ -1,0 +1,13 @@
+/* public/css/styles.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000; /* black background for a “Nintendo vibe” */
+}
+#game-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Switch Snatch</title>
+    <!-- Link to your CSS (Tailwind or custom) -->
+     <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="/css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Game container where Phaser will render the canvas -->
+    <div id="game-container"></div>
+
+    <!-- 1. Socket.io client script (auto-served) -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- 2. Phaser library -->
+    <script src="/js/phaser.min.js"></script>
+    <!-- 3. Networking glue for your game -->
+    <script src="/js/client-net.js"></script>
+    <!-- 4. Main game code -->
+    <script src="/js/game.js"></script>
+  </body>
+</html>
