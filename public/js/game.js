@@ -145,6 +145,44 @@ function create() {
   // 5l. All “other players” & “coin sprites” are now being managed by client-net.js
   //      via addOtherPlayer() and addCoinSprite(). We just needed to hook overlap
   //      and our own scoreText logic.
+
+  // ────────────────────────────────────────────────────────────────────────────────
+  // 5m. Connection monitoring and player sync
+  const connectionStatus = {
+    connected: false,
+    lastSync: 0
+  };
+
+  // Track connection status
+  socket.on('connect', () => {
+    console.log('Connected to server!');
+    connectionStatus.connected = true;
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Disconnected from server!');
+    connectionStatus.connected = false;
+  });
+
+  // Periodically request a full player list sync if we've been connected for a while
+  this.time.addEvent({
+    delay: 5000, // Every 5 seconds
+    callback: () => {
+      if (connectionStatus.connected && Date.now() - connectionStatus.lastSync > 5000) {
+        console.log('Requesting player list sync...');
+        socket.emit('getActivePlayers');
+        connectionStatus.lastSync = Date.now();
+      }
+    },
+    loop: true
+  });
+
+  // Listen for player joined scene events from the server
+  socket.on('playerJoinedScene', ({ playerId, x, y }) => {
+    console.log(`Player ${playerId} joined scene at (${x}, ${y})`);
+    // Force an update of our player list
+    socket.emit('getActivePlayers');
+  });
 }
 
 // ────────────────────────────────────────────────────────────────────────────────
