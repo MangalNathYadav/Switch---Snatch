@@ -27,16 +27,27 @@ socket.on('newPlayer', ({ playerId, data }) => {
 // 5. When the server broadcasts a position update for some other player
 socket.on('updatePosition', ({ playerId, x, y }) => {
   const other = otherPlayers[playerId];
-  if (other) {
+  if (other && other.sprite) {
     // Smoothly move or just set directly
-    other.setPosition(x, y);
+    other.sprite.setPosition(x, y);
+    
+    // Update the name label position too
+    if (other.nameLabel) {
+      other.nameLabel.setPosition(x, y - 20);
+    }
   }
 });
 
 // 6. When the server tells us a player disconnected
 socket.on('playerDisconnected', ({ playerId }) => {
   if (otherPlayers[playerId]) {
-    otherPlayers[playerId].destroy();      // remove sprite
+    // Destroy sprite and name label if they exist
+    if (otherPlayers[playerId].sprite) {
+      otherPlayers[playerId].sprite.destroy();
+    }
+    if (otherPlayers[playerId].nameLabel) {
+      otherPlayers[playerId].nameLabel.destroy();
+    }
     delete otherPlayers[playerId];         // remove from our map
   }
 });

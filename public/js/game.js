@@ -97,6 +97,13 @@ function update(time, delta) {
     lastSent = time;
   }
 
-  // 6d. If we had name/label above our own head, we’d update it here similarly:
+  // 6d. If we had name/label above our own head, we'd update it here similarly:
   //     e.g. nameLabel.setPosition(player.x, player.y - 20);
 }
+
+// 7. Handle AudioContext issues
+document.addEventListener('click', () => {
+  if (game.sound && game.sound.context && game.sound.context.state === 'suspended') {
+    game.sound.context.resume();
+  }
+});
